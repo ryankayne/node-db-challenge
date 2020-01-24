@@ -4,7 +4,6 @@ exports.up = function(knex) {
     .createTable('project', tbl => {
     tbl.increments().unique();
     tbl.text('project_name')
-    .unique()
     .notNullable();
     tbl.text('project_description');
     tbl.boolean('completed')

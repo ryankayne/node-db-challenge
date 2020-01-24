@@ -1,17 +1,22 @@
 const db = require('../data/dbConfig.js');
 
 module.exports = {
-    find,
-    findById,
+    findProject,
+    findProjectById,
     // findTasks,
-    add
+    addProject,
+    findTask,
+    // findTaskById,
+    addTask,
+    findResource,
+    addResource
 };
 
-function find() {
+function findProject() {
     return db('project')
 }
 
-function findById(id) {
+function findProjectById(id) {
     return db('project')
       .where({ id })
       .first();
@@ -30,10 +35,39 @@ function findById(id) {
 //       .orderBy('task_id');
 //   }
 
-  function add(project) {
+  function addProject(project) {
     return db('project')
       .insert(project)
-      .then(id => {
-        return findById(id);
-      });
+    //   .then(id => {
+    //     return findById(id);
+    //   });
   }
+
+  function findTask(id) {
+    return db('task')
+    .select('task.task_description',
+      'task.task_notes',
+      'task.completed',
+      'project.project_name'  
+      )
+      .join('project', 'project.id', 'task.project_id')
+      .where('project_id', id );
+}
+
+// function findTaskById(id) {
+//     return db('task')
+//     .where({id})
+      
+//   }
+
+  function addTask(task) {
+    return db.insert(task, '*').into('task');
+  }
+
+  function findResource() {
+    return db('resources')
+}
+
+function addResource(resource) {
+    return db('resources').insert(resource)
+  };
