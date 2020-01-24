@@ -3,8 +3,7 @@ exports.up = function(knex) {
     return knex.schema
     .createTable('project', tbl => {
     tbl.increments();
-    tbl.text('project_id');
-    tbl.text('name')
+    tbl.text('project_name')
     .notNullable();
     tbl.text('project_description');
     tbl.boolean('completed');
@@ -15,7 +14,7 @@ exports.up = function(knex) {
     tbl.increments();
     tbl.integer('task_id')
     .unsigned()
-    .references('project_id')
+    .references('id')
     .inTable('project');
     tbl.text('task_description')
     .notNullable();
@@ -27,7 +26,7 @@ exports.up = function(knex) {
     tbl.integer('resource_id')
     .unsigned()
     .notNullable()
-    .references('project_id')
+    .references('id')
     .inTable('project');
     // .onDelete('RESTRICT')
     // .onUpdate('CASCADE'); 
