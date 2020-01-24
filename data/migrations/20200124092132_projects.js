@@ -12,22 +12,20 @@ exports.up = function(knex) {
  })
  .createTable('task', tbl => {
     tbl.increments();
-    tbl.integer('task_id')
-    .unsigned()
-    .references('id')
-    .inTable('project');
+    tbl.text('task_name');
     tbl.text('task_description')
     .notNullable();
     tbl.text('task_notes');
+    tbl.boolean('completed');
  })
  
  .createTable('resources', tbl => {
     tbl.increments();
-    tbl.integer('resource_id')
-    .unsigned()
-    .notNullable()
-    .references('id')
-    .inTable('project');
+    // tbl.integer('resource_id')
+    // .unsigned()
+    // .notNullable()
+    // .references('id')
+    // .inTable('project');
     // .onDelete('RESTRICT')
     // .onUpdate('CASCADE'); 
     tbl.text('resource_name')
