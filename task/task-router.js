@@ -4,8 +4,10 @@ const Task = require('./task-model')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  Task.find()
+router.get('/:id', (req, res) => {
+    const id = req.params;
+
+  Task.findById(id)
   .then(task => {
     res.json(task);
   })
@@ -15,7 +17,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
     const taskData = req.body;
   
     Task.add(taskData)

@@ -13,8 +13,14 @@ function find() {
 
 function findById(id) {
     return db('task')
-      .where({ id })
-      .first();
+      .select('task.task_description',
+      'task.task_notes',
+      'task.completed',
+      'project.project_name'  
+      )
+      .join('project', 'project.id', 'task.project_id')
+      .where('project_id', id );
+
   }
 
 //   function findTasks(id) {
