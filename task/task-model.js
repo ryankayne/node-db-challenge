@@ -7,19 +7,21 @@ module.exports = {
     add
 };
 
-function find() {
+function find(id) {
     return db('task')
-}
-
-function findById(id) {
-    return db('task')
-      .select('task.task_description',
+    .select('task.task_description',
       'task.task_notes',
       'task.completed',
       'project.project_name'  
       )
       .join('project', 'project.id', 'task.project_id')
       .where('project_id', id );
+}
+
+function findById(id) {
+    return db('task')
+    .where({id})
+      
 
   }
 
@@ -37,10 +39,5 @@ function findById(id) {
 //   }
 
   function add(task) {
-    return db('task')
-      .insert(task, 'id')
-      .then(ids => {
-        const [id] = ids;
-        return findById(id);
-      });
+    return db.insert(task, '*').into('task');
   }

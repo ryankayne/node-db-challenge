@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
 
     Project.findById(id)
     .then(project => {
-        if (proj) {
+        if (project) {
       res.json(project);
         } else {
             res.status(404).json({ message: 'Failed to find project with that ID.'})
@@ -38,8 +38,8 @@ router.get('/:id/tasks', (req, res) => {
     const { id } = req.params;
 
     Task.findById(id)
-    .then(project => {
-        res.json(project);
+    .then(task => {
+        res.status(200).json(task);
     })
     .catch(error => {
         console.log(error);
@@ -47,7 +47,7 @@ router.get('/:id/tasks', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
     const projectData = req.body;
   
     Project.add(projectData)

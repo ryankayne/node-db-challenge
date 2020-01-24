@@ -14,7 +14,6 @@ function find() {
 function findById(id) {
     return db('resources')
       .where({ id })
-      .first();
   }
 
 //   function findTasks(id) {
@@ -30,11 +29,15 @@ function findById(id) {
 //       .orderBy('task_id');
 //   }
 
+//   function add(resource) {
+//     return db('resources')
+//       .insert(resource, 'id')
+//       .then(ids => {
+//         const [id] = ids;
+//         return findById(id);
+//       });
+//   }
+
   function add(resource) {
-    return db('resources')
-      .insert(resource, 'id')
-      .then(ids => {
-        const [id] = ids;
-        return findById(id);
-      });
-  }
+    return db('resources').insert(resource)
+  };
