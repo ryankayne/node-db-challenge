@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js"
-  },
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ryankayne/node-db-challenge.git"
