@@ -10,7 +10,7 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/project', ProjectRouter);
+server.use('/api', ProjectRouter);
 
 // server.use('/api/tasks', TaskRouter);
 

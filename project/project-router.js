@@ -6,7 +6,7 @@ const Project = require('./project-model.js')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/project', (req, res) => {
   Project.findProject()
   .then(project => {
     res.json(project);
@@ -17,37 +17,37 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/:id', (req, res) => {
-    const { id } = req.params;
+// router.get('/project/:id', (req, res) => {
+//     const { id } = req.params;
 
-    Project.findProjectById(id)
-    .then(project => {
-        if (project) {
-      res.json(project);
-        } else {
-            res.status(404).json({ message: 'Failed to find project with that ID.'})
-        }
-    })
-    .catch(error => {
-        console.log(error);
-      res.status(500).json({ message: 'Failed to find project' });
-    });
-  });
+//     Project.findProjectById(id)
+//     .then(project => {
+//         if (project) {
+//       res.json(project);
+//         } else {
+//             res.status(404).json({ message: 'Failed to find project with that ID.'})
+//         }
+//     })
+//     .catch(error => {
+//         console.log(error);
+//       res.status(500).json({ message: 'Failed to find project' });
+//     });
+//   });
 
-router.get('/:id/tasks', (req, res) => {
-    const { id } = req.params;
+// router.get('/project/:id/tasks', (req, res) => {
+//     const { id } = req.params;
 
-    Project.findProjectById(id)
-    .then(task => {
-        res.status(200).json(task);
-    })
-    .catch(error => {
-        console.log(error);
-        res.status(500).json({ message: 'Failed to get project' });
-    });
-});
+//     Project.findProjectById(id)
+//     .then(task => {
+//         res.status(200).json(task);
+//     })
+//     .catch(error => {
+//         console.log(error);
+//         res.status(500).json({ message: 'Failed to get project' });
+//     });
+// });
 
-router.post('/tasks', (req, res) => {
+router.post('/project', (req, res) => {
     const projectData = req.body;
   
     Project.addProject(projectData)
@@ -59,6 +59,17 @@ router.post('/tasks', (req, res) => {
       res.status(500).json({ message: 'Failed to create new project' });
     });
   });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,7 +85,7 @@ router.post('/tasks', (req, res) => {
   });
 });
 
-router.post('/:id/tasks', (req, res) => {
+router.post('/project/:id/tasks', (req, res) => {
     const taskData = req.body;
     const id = req.params.id
 
@@ -90,6 +101,14 @@ router.post('/:id/tasks', (req, res) => {
 
 
 
+
+
+
+
+
+
+
+  
   router.get('/resources', (req, res) => {
     Project.findResource()
   .then(resource => {

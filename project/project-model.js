@@ -43,16 +43,16 @@ function findProjectById(id) {
     //   });
   }
 
-  function findTask(id) {
-    return db('task')
-    .select('task.task_description',
-      'task.task_notes',
-      'task.completed',
-      'project.project_name'  
-      )
-      .join('project', 'project.id', 'task.project_id')
-      .where('project_id', id );
-}
+//   function findTask(project_id) {
+//     return db('task')
+//     .select('task.task_description',
+//       'task.task_notes',
+//       'task.completed',
+//       'project.project_name'
+//       )
+//       .join('project', 'project.id', 'task.project_id')
+//       .where({ project_id });
+// }
 
 // function findTaskById(id) {
 //     return db('task')
@@ -60,8 +60,21 @@ function findProjectById(id) {
       
 //   }
 
-  function addTask(task) {
-    return db.insert(task, '*').into('task');
+function findTask() {
+    return db('task')
+    .join('project', 'project.id', 'task.project_id')
+    .select('task.task_name',
+          'task.task_description',
+          'task.task_notes',
+          'task.completed',
+          'project.project_name',
+          'project.project_description'
+          )
+        
+  }
+
+  function addTask(task, id) {
+    return db.insert({ ...task, project_id: id }).into('task');
   }
 
   function findResource() {
